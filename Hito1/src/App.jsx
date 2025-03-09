@@ -1,6 +1,6 @@
-import Home from "./assets/components/Home";
-import Navbar from "./assets/components/Navbar";
-import Footer from "./assets/components/Footer";
+import Home from "./assets/Home";
+import Navbar from "./assets/Navbar";
+import Footer from "./assets/Footer";
 import "bootstrap/dist/css/bootstrap.min.css";
 
 
