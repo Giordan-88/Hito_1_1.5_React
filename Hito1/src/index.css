@@ -127,3 +127,14 @@ button:focus-visible {
     height: 200px; 
     object-fit: cover;
   }
+
+  .login-input {
+    background-color: white;
+    color: black;
+    border: 1px solid #ced4da;
+    padding: 0.375rem 0.75rem;
+    border-radius: 0.25rem;
+    width: 100%;
+    margin-bottom: 1rem;
+    margin-top: 0.5rem;
+  }

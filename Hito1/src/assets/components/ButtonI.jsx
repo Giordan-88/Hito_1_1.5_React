@@ -1,4 +1,4 @@
-function Button({ buttonText, className = '', onClick }) {
+function ButtonI({ buttonText, className = '', onClick }) {
   return (
     <button
       type="button"
@@ -11,4 +11,4 @@ function Button({ buttonText, className = '', onClick }) {
 }
 
 
-export default Button;
+export default ButtonI;
