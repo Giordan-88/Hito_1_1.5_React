@@ -26,31 +26,25 @@ function App() {
   };
 
   const handleIncrease = (id) => {
-    // Make a copy of the cart
     const newCart = { ...cart };
-  
-    // Increase quantity
+
     if (newCart[id]) {
       newCart[id].quantity += 1;
-      // Set the new cart state directly
+
       setCart(newCart);
     }
   };
-  
+
   const handleDecrease = (id) => {
-    // Make a copy of the cart
     const newCart = { ...cart };
-  
-    // Decrease quantity
+
     if (newCart[id]) {
       newCart[id].quantity -= 1;
-  
-      // Remove item if quantity is zero
+
       if (newCart[id].quantity <= 0) {
         delete newCart[id];
       }
-  
-      // Set the new cart state directly
+
       setCart(newCart);
     }
   };
