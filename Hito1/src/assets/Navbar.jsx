@@ -6,18 +6,24 @@ import ButtonI from "./ButtonI";
 import Login from "./Login";
 import { useState } from "react";
 import Register from "./Register";
+import Cart from "./Cart";
 
-function NavbarComponent() {
+function NavbarComponent({ totalItems, totalPrice, handleShowC }) {
   const [showLogin, setShowL] = useState(false);
   const [showRegister, setShowR] = useState(false);
+  
 
   const handleCloseL = () => setShowL(false);
   const handleShowL = () => setShowL(true);
 
   const handleCloseR = () => setShowR(false);
   const handleShowR = () => setShowR(true);
- 
 
+  const handleCartShow = (e) => {
+    e.preventDefault();
+    e.stopPropagation();
+    handleShowC();
+  };
   return (
     <Navbar collapseOnSelect expand="lg" className="bg-body-tertiary">
       <Container>
@@ -44,15 +50,17 @@ function NavbarComponent() {
           </Nav>
           <Nav>
             <ButtonI
-              eventKey={2}
               href="#memes"
-              buttonText={"🛒 Total: $25.000"}
+              buttonText={`🛒 Cart (${totalItems}) - $${totalPrice.toLocaleString()}`}
+              onClick={handleCartShow}
+              
             />
           </Nav>
         </Navbar.Collapse>
       </Container>
       <Login show={showLogin} handleClose={handleCloseL} />
       <Register show={showRegister} handleClose={handleCloseR} />
+      
     </Navbar>
   );
 }

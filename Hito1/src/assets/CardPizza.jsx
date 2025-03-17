@@ -1,10 +1,6 @@
-import Card from "react-bootstrap/Card";
-import ListGroup from "react-bootstrap/ListGroup";
-import Button from "react-bootstrap/Button";
-import Image from "react-bootstrap/Image";
-import CloseButton from "react-bootstrap/CloseButton";
+import { Image, ListGroup, Button, CloseButton, Card } from "react-bootstrap";
 
-function CardPizza({ title, image, ingredients, price }) {
+function CardPizza({ id, title, image, ingredients, price, onAddToCart }) {
   return (
     <Card className="cardPizza" bg="light" text="dark" style={{ width: "20rem", textAlign: "center" }}>
       <Image variant="top" src={image} alt={title} className="cardPizza-image" />
@@ -22,11 +18,13 @@ function CardPizza({ title, image, ingredients, price }) {
         ))}
       </ListGroup>
       <Card.Body>
-        <h2 className="fw-bold text-success">{price}</h2>
+        <h2 className="fw-bold text-success">${price.toLocaleString()}</h2>
       </Card.Body>
       <Card.Footer className="d-flex justify-content-between">
         <Button variant="success">Ver más 👀</Button>
-        <Button variant="outline-secondary">Añadir 🛒</Button>
+        <Button variant="outline-secondary" onClick={() => onAddToCart( id, title, image, price )}>
+          Añadir 🛒
+        </Button>
       </Card.Footer>
     </Card>
   );
