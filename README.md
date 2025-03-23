@@ -11,3 +11,9 @@ On March 9, 2025, changes were made to the project, incorporating a simulation o
 El 17 de marzo de 2025 en React, agregamos botones interactivos para añadir pizzas, permitiendo aumentar o disminuir la cantidad seleccionada. Además, implementamos una función que actualiza automáticamente el total a pagar según la cantidad elegida.
 
 On March 17, 2025, in React, we added interactive buttons to add pizzas, allowing users to increase or decrease the selected quantity. Additionally, we implemented a function that automatically updates the total amount to be paid based on the chosen quantity.
+
+
+El 23 de marzo se trabajó en el consumo de una API de pizzas, la cual está almacenada en un backend proporcionado. No fue necesario modificar el backend, solo levantarlo para enfocarnos en el desarrollo del frontend.
+
+On March 23, we worked on consuming a pizza API, which is stored in a provided backend. It was not necessary to modify the backend, only to run it, as the focus of this course is on frontend development.
+
