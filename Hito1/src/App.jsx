@@ -4,7 +4,7 @@ import Footer from "./assets/Footer";
 import "bootstrap/dist/css/bootstrap.min.css";
 import Cart from "./assets/Cart";
 import { useState, useCallback } from "react";
-
+import Pizza from "./assets/Pizza";
 function App() {
   const [cart, setCart] = useState({});
   const [showCart, setShowC] = useState(false);
@@ -63,7 +63,7 @@ function App() {
         onDecrease={handleDecrease}
         onIncrease={handleIncrease}
       />
-
+<Pizza />
       <Home cart={cart} onCartUpdate={handleCartUpdate} />
       <Footer
         footerText={

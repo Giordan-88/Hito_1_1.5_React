@@ -1,11 +1,12 @@
 import { Image, ListGroup, Button, CloseButton, Card } from "react-bootstrap";
 
-function CardPizza({ id, title, image, ingredients, price, onAddToCart }) {
+function CardPizza({ id,name, title, image, ingredients, price, onAddToCart, desc }) {
   return (
     <Card className="cardPizza" bg="light" text="dark" style={{ width: "20rem", textAlign: "center" }}>
       <Image variant="top" src={image} alt={title} className="cardPizza-image" />
       <Card.Body>
-        <Card.Title>{title}</Card.Title>
+        <Card.Title>{name}</Card.Title>
+        <Card.Text>{desc}</Card.Text>
       </Card.Body>
       <ListGroup className="list-group-flush" as="ol" numbered>
         {ingredients.map((ingredient, index) => (

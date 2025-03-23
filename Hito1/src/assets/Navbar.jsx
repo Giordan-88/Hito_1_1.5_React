@@ -32,6 +32,7 @@ function NavbarComponent({ totalItems, totalPrice, handleShowC }) {
         <Navbar.Collapse id="responsive-navbar-nav">
           <Nav className="me-auto">
             <ButtonI href="#features" buttonText={"🍕 Home"} />
+            <ButtonI href="#pizza1" buttonText={"🍕 Pizza"} />
             <NavDropdown title="💼 Account" id="collapsible-nav-dropdown">
               <ButtonI href="#action/3.1" buttonText={"🔓 Profile"} />
               <ButtonI href="#action/3.2" buttonText={"🔒 Logout"} />
