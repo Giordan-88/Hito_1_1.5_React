@@ -17,3 +17,9 @@ On March 23, we worked on consuming a pizza API, which is stored in a provided b
 30 de marzo, Esta semana aprendimos a implementar rutas en React utilizando React Router. Exploramos cómo definir rutas, crear navegación entre páginas y manejar parámetros dinámicos para mejorar la estructura y funcionalidad de nuestras aplicaciones.
 
 On March 30th, we learned how to implement routing in React using React Router. We explored how to define routes, create navigation between pages, and handle dynamic parameters to improve the structure and functionality of our applications.
+
+
+06 de abril, Se implementó el uso de Context en React para manejar el estado global de la aplicación. Esto permitió compartir datos entre múltiples componentes sin necesidad de prop drilling, facilitando la gestión de temas, autenticación y otros estados compartidos.
+
+April 6
+Implemented the use of Context in React to manage the global state of the application. This allowed data to be shared across multiple components without the need for prop drilling, making it easier to handle themes, authentication, and other shared states.
