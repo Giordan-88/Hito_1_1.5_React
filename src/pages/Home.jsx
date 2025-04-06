@@ -1,8 +1,12 @@
 import Header from "../assets/Header";
 import CardPizza from "../assets/CardPizza";
 import { useState, useEffect } from "react";
+import { useContext } from "react";
+import { CartContext } from "../context/CartContext";
 
-function Home({ cart, onCartUpdate }) {
+function Home() {
+  const { cart, handleAddToCart } = useContext(CartContext);
+
   const [pizzas, setPizzas] = useState([]);
 
   useEffect(() => {
@@ -19,16 +23,6 @@ function Home({ cart, onCartUpdate }) {
     }
   }
 
-  const handleAddToCart = (id, title, image, price) => {
-    const newCart = { ...cart };
-    if (newCart[id]) {
-      newCart[id].quantity += 1;
-    } else {
-      newCart[id] = { title, image, price, quantity: 1 };
-    }
-    onCartUpdate(newCart);
-  };
-
   return (
     <div>
       <Header />
@@ -41,7 +35,6 @@ function Home({ cart, onCartUpdate }) {
             image={pizza.img}
             ingredients={pizza.ingredients}
             price={pizza.price}
-            onAddToCart={handleAddToCart}
             desc={pizza.desc}
           />
         ))}

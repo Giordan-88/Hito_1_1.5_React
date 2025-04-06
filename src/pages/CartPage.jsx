@@ -1,12 +1,13 @@
 import Offcanvas from "react-bootstrap/Offcanvas";
 import { Image, ListGroup, Button } from "react-bootstrap";
 import { Link } from "react-router-dom";
+import { useContext } from "react";
+import { CartContext } from "../context/CartContext";
 
-function CartPage({ cart }) {
-  const totalPrice = Object.values(cart).reduce(
-    (acc, item) => acc + item.price * item.quantity,
-    0
-  );
+function CartPage() {
+
+  const { cart, totalPrice, handleDecrease, handleIncrease, capitalize } = useContext(CartContext);
+
 
   return (
     <div className="d-flex flex-column align-items-center vh-100">
@@ -25,7 +26,7 @@ function CartPage({ cart }) {
                 className="me-3"
               />
               <div className="flex-grow-1">
-                <h6 className="mb-1 text-center">{item.title}</h6>
+                <h6 className="mb-1 ">{capitalize(item.title)}</h6>
                 <div className="d-flex justify-content-between align-items-center">
                   <small className="text-muted">
                     ${item.price.toLocaleString()}
@@ -34,7 +35,7 @@ function CartPage({ cart }) {
                     <Button
                       variant="outline-secondary"
                       size="sm"
-                      onClick={() => onDecrease(id)}
+                      onClick={() => handleDecrease(id)}
                     >
                       -
                     </Button>
@@ -47,7 +48,7 @@ function CartPage({ cart }) {
                     <Button
                       variant="outline-secondary"
                       size="sm"
-                      onClick={() => onIncrease(id)}
+                      onClick={() => handleIncrease(id)}
                     >
                       +
                     </Button>
@@ -72,16 +73,16 @@ function CartPage({ cart }) {
         Total: ${totalPrice.toLocaleString()}
       </h3>
       <div className="d-flex justify-content-between mt-4 w-50">
-      <Link to="/">
-        <Button variant="secondary" size="sm">
-          Volver
+        <Link to="/">
+          <Button variant="secondary" size="sm">
+            Volver
+          </Button>
+        </Link>
+        <Button variant="success" size="sm">
+          Comprar
         </Button>
-      </Link>
-      <Button variant="success" size="sm">
-        Comprar
-      </Button>
+      </div>
     </div>
-  </div>
   );
 }
 

@@ -1,20 +1,18 @@
 import Offcanvas from "react-bootstrap/Offcanvas";
+import React, { useContext } from "react";
 import { Image, ListGroup, Button } from "react-bootstrap";
 import { Link } from "react-router-dom";
+import { CartContext } from "../context/CartContext";
+
 
 function Cart({
   show,
   handleClose,
   placement,
-  cart,
-  onDecrease,
-  onIncrease,
+
   ...props
 }) {
-  const totalPrice = Object.values(cart).reduce(
-    (acc, item) => acc + item.price * item.quantity,
-    0
-  );
+  const { totalPrice, cart, handleIncrease, handleDecrease, capitalize } = useContext(CartContext);
 
   return (
     <>
@@ -36,7 +34,7 @@ function Cart({
                     className="me-2"
                   />
                   <div className="flex-grow-1">
-                    <h6 className="mb-1">{item.title}</h6>
+                    <h6 className="mb-1">{capitalize(item.title)}</h6>
                     <div className="d-flex justify-content-between align-items-center">
                       <small className="text-muted">
                         ${item.price.toLocaleString()}
@@ -45,7 +43,7 @@ function Cart({
                         <Button
                           variant="outline-secondary"
                           size="sm"
-                          onClick={() => onDecrease(id)}
+                          onClick={() => handleDecrease(id)}
                         >
                           -
                         </Button>
@@ -58,7 +56,7 @@ function Cart({
                         <Button
                           variant="outline-secondary"
                           size="sm"
-                          onClick={() => onIncrease(id)}
+                          onClick={() => handleIncrease(id)}
                         >
                           +
                         </Button>
@@ -81,7 +79,11 @@ function Cart({
             Total: ${totalPrice.toLocaleString()}
           </h3>
           <Link to="/cart">
-            <Button variant="success" className="mt-4 w-100" onClick={handleClose}>
+            <Button
+              variant="success"
+              className="mt-4 w-100"
+              onClick={handleClose}
+            >
               Ir a Pagar{" "}
             </Button>
           </Link>

@@ -3,21 +3,12 @@ import Nav from "react-bootstrap/Nav";
 import Navbar from "react-bootstrap/Navbar";
 import NavDropdown from "react-bootstrap/NavDropdown";
 import ButtonI from "./ButtonI";
-import Login from "../pages/Login";
-import { useState } from "react";
-import Register from "../pages/Register";
-import Cart from "../pages/Cart";
 import { Link } from "react-router-dom";
+import { useContext } from "react";
+import { CartContext } from "../context/CartContext";
 
-function NavbarComponent({ totalItems, totalPrice, handleShowC }) {
-  const [showLogin, setShowL] = useState(false);
-  const [showRegister, setShowR] = useState(false);
-
-  const handleCloseL = () => setShowL(false);
-  const handleShowL = () => setShowL(true);
-
-  const handleCloseR = () => setShowR(false);
-  const handleShowR = () => setShowR(true);
+function NavbarComponent({ handleShowC }) {
+  const { totalItems, totalPrice } = useContext(CartContext);
 
   const handleCartShow = (e) => {
     e.preventDefault();
