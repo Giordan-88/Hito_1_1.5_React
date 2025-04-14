@@ -3,11 +3,12 @@ import { Image, ListGroup, Button } from "react-bootstrap";
 import { Link } from "react-router-dom";
 import { useContext } from "react";
 import { CartContext } from "../context/CartContext";
+import { UserContext } from "../context/UserContext";
 
 function CartPage() {
-
-  const { cart, totalPrice, handleDecrease, handleIncrease, capitalize } = useContext(CartContext);
-
+  const { cart, totalPrice, handleDecrease, handleIncrease, capitalize } =
+    useContext(CartContext);
+  const { token } = useContext(UserContext);
 
   return (
     <div className="d-flex flex-column align-items-center vh-100">
@@ -78,9 +79,17 @@ function CartPage() {
             Volver
           </Button>
         </Link>
+        {token ? 
         <Button variant="success" size="sm">
-          Comprar
+          Pagar
         </Button>
+        :
+        <Link to="/login">
+          <Button variant="success" size="sm">
+            Necesitas Iniciar Sesión para Pagar
+          </Button>
+        </Link>
+        }
       </div>
     </div>
   );

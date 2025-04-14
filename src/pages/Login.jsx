@@ -1,13 +1,18 @@
-import Modal from "react-bootstrap/Modal";
 import Button from "react-bootstrap/Button";
 import Form from "react-bootstrap/Form";
 import { useState, useRef } from "react";
 import Alert from "react-bootstrap/Alert";
 import Card from "react-bootstrap/Card";
 import { Link } from "react-router-dom";
-function Login({ show, handleClose }) {
+import { useContext } from "react";
+import { UserContext } from "../context/UserContext";
+
+
+function Login({ show }) {
+  const { login } = useContext(UserContext);
   const emailRef = useRef(null);
   const passwordRef = useRef(null);
+  
 
   const [errorMessage, setErrorMessage] = useState(null);
 
@@ -55,15 +60,11 @@ function Login({ show, handleClose }) {
       emailValue === validCredentials.email &&
       passwordValue === validCredentials.password
     ) {
+      login();
       console.log("Login successful!");
       setWelcomeMessage("Bienvenido a Pizzería Mamma Mia!");
-
       setErrorMessage(null);
-
-      // Tiempo de espera antes de cerrar el modal
-      setTimeout(() => {
-        handleModalClose();
-      }, 1000);
+      
     } else {
       setErrorMessage("Correo o contraseña incorrectos. Inténtelo de nuevo.");
     }
@@ -76,7 +77,6 @@ function Login({ show, handleClose }) {
 
     setErrorMessage(null);
     setWelcomeMessage(null);
-    handleClose();
   };
 
   return (
@@ -87,7 +87,6 @@ function Login({ show, handleClose }) {
       <Card className="p-4" style={{ width: "100%", maxWidth: "400px" }}>
         <Card.Header className="d-flex justify-content-between align-items-center">
           <Card.Title>Iniciar Sesión</Card.Title>
-          {/* <Button variant="close" onClick={handleModalClose} /> */}
         </Card.Header>
         <Card.Body>
           {errorMessage && (

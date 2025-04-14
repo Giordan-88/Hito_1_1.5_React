@@ -17,3 +17,31 @@ On March 23, we worked on consuming a pizza API, which is stored in a provided b
 30 de marzo, Esta semana aprendimos a implementar rutas en React utilizando React Router. Exploramos cómo definir rutas, crear navegación entre páginas y manejar parámetros dinámicos para mejorar la estructura y funcionalidad de nuestras aplicaciones.
 
 On March 30th, we learned how to implement routing in React using React Router. We explored how to define routes, create navigation between pages, and handle dynamic parameters to improve the structure and functionality of our applications.
+
+06 de abril, Se implementó el uso de Context en React para manejar el estado global de la aplicación. Esto permitió compartir datos entre múltiples componentes sin necesidad de prop drilling, facilitando la gestión de temas, autenticación y otros estados compartidos.
+
+April 6 Implemented the use of Context in React to manage the global state of the application. This allowed data to be shared across multiple components without the need for prop drilling, making it easier to handle themes, authentication, and other shared states.
+
+Resumen - 13 de abril
+Hoy se trabajó en la implementación del enrutamiento con seguridad dentro de la aplicación. Los principales avances fueron:
+
+Protección de rutas:
+Se agregaron rutas seguras que requieren autenticación para poder acceder. Esto se logró creando un componente de protección que verifica si el usuario tiene permiso antes de permitir el acceso.
+
+Uso de Navigate:
+Se utilizó el componente Navigate de React Router para redirigir automáticamente a los usuarios no autenticados hacia la página de login u otra ruta segura, mejorando el flujo de navegación.
+
+Organización del sistema de rutas:
+Se reestructuraron las rutas para mantener el código más limpio y ordenado, separando claramente las rutas públicas de las rutas protegidas.
+
+Summary - April 13
+Today, we worked on implementing secure routing in the application. The main updates were:
+
+Route protection:
+Secure routes were added, requiring authentication to access. This was done by creating a protection component that checks whether the user has permission before allowing access.
+
+Use of Navigate:
+The Navigate component from React Router was used to automatically redirect unauthenticated users to the login page or another secure route, improving navigation flow.
+
+Routing structure reorganization:
+The routing system was reorganized to keep the code cleaner and more maintainable, clearly separating public routes from protected ones.

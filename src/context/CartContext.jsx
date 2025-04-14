@@ -1,9 +1,14 @@
-import React, { createContext, useState } from "react";
+import React, { createContext, useState, useEffect } from "react";
 
 export const CartContext = createContext();
 
 export function CartProvider({ children }) {
   const [cart, setCart] = useState({});
+
+  useEffect(() => {
+    const storedCart = localStorage.getItem("cart");
+    setCart(!!storedCart);
+  }, []);
 
   const capitalize = (text) => {
     return text
@@ -31,6 +36,7 @@ export function CartProvider({ children }) {
       } else {
         newCart[id] = { title, image, price, quantity: 1 };
       }
+      localStorage.setItem("cart", JSON.stringify(newCart));
       return newCart;
     });
   };
@@ -42,7 +48,7 @@ export function CartProvider({ children }) {
       if (newCart[id]) {
         newCart[id].quantity += 1;
       }
-
+      localStorage.setItem("cart", JSON.stringify(newCart));
       return newCart;
     });
   };
@@ -58,7 +64,7 @@ export function CartProvider({ children }) {
           delete newCart[id];
         }
       }
-
+      localStorage.setItem("cart", JSON.stringify(newCart));
       return newCart;
     });
   };

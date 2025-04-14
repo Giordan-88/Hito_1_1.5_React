@@ -1,62 +1,74 @@
 import Container from "react-bootstrap/Container";
 import Nav from "react-bootstrap/Nav";
 import Navbar from "react-bootstrap/Navbar";
-import NavDropdown from "react-bootstrap/NavDropdown";
-import ButtonI from "./ButtonI";
 import { Link } from "react-router-dom";
+import ButtonI from "./ButtonI";
+import { NavLink } from "react-router-dom";
 import { useContext } from "react";
 import { CartContext } from "../context/CartContext";
+import { UserContext } from "../context/UserContext";
 
 function NavbarComponent({ handleShowC }) {
   const { totalItems, totalPrice } = useContext(CartContext);
+  const { token, logout } = useContext(UserContext);
+  const setActiveClass = ({ isActive }) => (isActive ? "active" : undefined);
 
   const handleCartShow = (e) => {
     e.preventDefault();
     e.stopPropagation();
     handleShowC();
   };
+
   return (
     <Navbar collapseOnSelect expand="lg" className="bg-body-tertiary w-100">
       <Container>
-        <Navbar.Brand href="#home">Pizzería Mamma Mia!</Navbar.Brand>
+        <Link
+          to="/"
+          style={{
+            textDecoration: "none",
+            color: "inherit",
+            fontSize: "1.5rem",
+          }}
+        >
+          <Navbar.Brand>Pizzería Mamma Mia!</Navbar.Brand>
+        </Link>
+
         <Navbar.Toggle aria-controls="responsive-navbar-nav" />
         <Navbar.Collapse id="responsive-navbar-nav">
           <Nav className="me-auto">
-            <Link to="/">
+            <NavLink to="/" className={setActiveClass}>
               <ButtonI href="#features" buttonText={"🍕 Home"} />
-            </Link>
-            <Link to="/pizza/p001">
-              <ButtonI href="#pizza1" buttonText={"🍕 Pizza"} />{" "}
-            </Link>
-            <NavDropdown title="💼 Account" id="collapsible-nav-dropdown">
-              <Link to="/profile">
-                <ButtonI href="#action/3.1" buttonText={"🔓 Profile"} />
-              </Link>
-              <ButtonI href="#action/3.2" buttonText={"🔒 Logout"} />
-              <ButtonI href="#action/3.3" buttonText={"📖 History"} />
-            </NavDropdown>
-            <Link to="/notfound">
-              <ButtonI href="#action/3.4" buttonText={"🗺️ Map"} />
-            </Link>
-            <Link to="/login">
-              {
+            </NavLink>
+            <NavLink to="/pizza">
+              <ButtonI href="#pizza1" buttonText={"🍕 Pizzas"} />
+            </NavLink>
+
+            {token ? (
+              <>
+                {/* Botones visibles cuando el usuario está logueado */}
+                <NavLink to="/profile" className={setActiveClass}>
+                  <ButtonI href="#action/3.1" buttonText={"🔓 Profile"} />
+                </NavLink>
                 <ButtonI
-                  /* href="#pricing" */
-                  buttonText={"🔐 Login"}
-                  /* onClick={handleShowL} */
+                  onClick={logout}
+                  href="#action/3.2"
+                  buttonText={"🔒 Logout"}
                 />
-              }
-            </Link>
-            <Link to="/register">
-              {
-                <ButtonI
-                  href="#pricing"
-                  buttonText={"🔐 Register"}
-                  /* onClick={handleShowR} */
-                />
-              }
-            </Link>
+              </>
+            ) : (
+              <>
+                {/* Botones visibles cuando el usuario no está logueado */}
+                <NavLink to="/login" className={setActiveClass}>
+                  <ButtonI buttonText={"🔐 Login"} />
+                </NavLink>
+                <NavLink to="/register" className={setActiveClass}>
+                  <ButtonI href="#pricing" buttonText={"🔐 Register"} />
+                </NavLink>
+              </>
+            )}
           </Nav>
+
+          {/* Botón Total (siempre visible) */}
           <Nav>
             <ButtonI
               href="#memes"
@@ -66,8 +78,6 @@ function NavbarComponent({ handleShowC }) {
           </Nav>
         </Navbar.Collapse>
       </Container>
-      {/* <Login show={showLogin} handleClose={handleCloseL} />
-      <Register show={showRegister} handleClose={handleCloseR} /> */}
     </Navbar>
   );
 }

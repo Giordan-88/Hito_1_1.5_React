@@ -1,4 +1,3 @@
-import Modal from "react-bootstrap/Modal";
 import Button from "react-bootstrap/Button";
 import Col from "react-bootstrap/Col";
 import Form from "react-bootstrap/Form";
@@ -134,199 +133,105 @@ function Register({ show, handleClose }) {
   };
 
   return (
-    
     <div
-    className="d-flex justify-content-center align-items-center vh-100"
-    style={{ backgroundColor: "#f8f9fa" }}
-  >
-    <Card className="p-4" style={{ width: "100%", maxWidth: "400px" }}>
-      <Card.Header className="d-flex justify-content-between align-items-center">
-        <Card.Title>Crear Usuario</Card.Title>
-      </Card.Header>
-      <Card.Body>
-        {registrationSuccess && (
-          <Alert
-            variant="success"
-            onClose={() => setRegistrationSuccess(false)}
-            dismissible
-          >
-            ¡Registro exitoso! Su cuenta ha sido creada.
-          </Alert>
-        )}
-        <Form noValidate onSubmit={handleSubmit}>
-          <Form.Group as={Col} md="12" controlId="email">
-            <Form.Label>Ingresar Email:</Form.Label>
-            <Form.Control
-              type="email"
-              placeholder="Ejemplo: PizzeriaMammaMia!@hotmail.com"
-              value={formData.email}
-              onChange={handleChange}
-              isValid={validity.email === "valid"}
-              isInvalid={validity.email === "invalid"}
-              required
-            />
-            <Form.Control.Feedback type="invalid">
-              Ingrese un correo válido.
-            </Form.Control.Feedback>
-            <Form.Control.Feedback type="valid">
-              Correcto.
-            </Form.Control.Feedback>
-          </Form.Group>
-          <Form.Group as={Col} md="12" controlId="password">
-            <Form.Label>Ingresar Contraseña:</Form.Label>
-            <InputGroup hasValidation>
+      className="d-flex justify-content-center align-items-center vh-100"
+      style={{ backgroundColor: "#f8f9fa" }}
+    >
+      <Card className="p-4" style={{ width: "100%", maxWidth: "400px" }}>
+        <Card.Header className="d-flex justify-content-between align-items-center">
+          <Card.Title>Crear Usuario</Card.Title>
+        </Card.Header>
+        <Card.Body>
+          {registrationSuccess && (
+            <Alert
+              variant="success"
+              onClose={() => setRegistrationSuccess(false)}
+              dismissible
+            >
+              ¡Registro exitoso! Su cuenta ha sido creada.
+            </Alert>
+          )}
+          <Form noValidate onSubmit={handleSubmit}>
+            <Form.Group as={Col} md="12" controlId="email">
+              <Form.Label>Ingresar Email:</Form.Label>
               <Form.Control
-                type="password"
-                placeholder="Contraseña"
-                value={formData.password}
+                type="email"
+                placeholder="Ejemplo: PizzeriaMammaMia!@hotmail.com"
+                value={formData.email}
                 onChange={handleChange}
-                isValid={validity.password === "valid"}
-                isInvalid={validity.password === "invalid"}
+                isValid={validity.email === "valid"}
+                isInvalid={validity.email === "invalid"}
                 required
               />
               <Form.Control.Feedback type="invalid">
-                La contraseña debe tener al menos 6 caracteres.
+                Ingrese un correo válido.
               </Form.Control.Feedback>
               <Form.Control.Feedback type="valid">
-                Clave Válida.
+                Correcto.
               </Form.Control.Feedback>
-            </InputGroup>
-          </Form.Group>
-          <Form.Group as={Col} md="12" controlId="confirmPassword">
-            <Form.Label>Confirmar Contraseña:</Form.Label>
-            <Form.Control
-              type="password"
-              placeholder="Contraseña"
-              value={formData.confirmPassword}
-              onChange={handleChange}
-              isValid={validity.confirmPassword === "valid"}
-              isInvalid={validity.confirmPassword === "invalid"}
-              required
-            />
-            <Form.Control.Feedback type="invalid">
-              Las contraseñas no coinciden.
-            </Form.Control.Feedback>
-          </Form.Group>
-          <Form.Group as={Col} md="12" className="mb-3">
-            <Form.Check
-              required
-              id="terms"
-              label="Acepto los términos y condiciones"
-              feedback="Debe aceptar antes de enviar."
-              feedbackType="invalid"
-              checked={termsAgreed}
-              onChange={handleTermsChange}
-              isInvalid={submitted && !termsAgreed}
-            />
-          </Form.Group>
-          <div className="d-flex justify-content-between mt-4">
-            <Link to="/">
-              <Button variant="secondary" onClick={handleModalClose}>
-                Volver
+            </Form.Group>
+            <Form.Group as={Col} md="12" controlId="password">
+              <Form.Label>Ingresar Contraseña:</Form.Label>
+              <InputGroup hasValidation>
+                <Form.Control
+                  type="password"
+                  placeholder="Contraseña"
+                  value={formData.password}
+                  onChange={handleChange}
+                  isValid={validity.password === "valid"}
+                  isInvalid={validity.password === "invalid"}
+                  required
+                />
+                <Form.Control.Feedback type="invalid">
+                  La contraseña debe tener al menos 6 caracteres.
+                </Form.Control.Feedback>
+                <Form.Control.Feedback type="valid">
+                  Clave Válida.
+                </Form.Control.Feedback>
+              </InputGroup>
+            </Form.Group>
+            <Form.Group as={Col} md="12" controlId="confirmPassword">
+              <Form.Label>Confirmar Contraseña:</Form.Label>
+              <Form.Control
+                type="password"
+                placeholder="Contraseña"
+                value={formData.confirmPassword}
+                onChange={handleChange}
+                isValid={validity.confirmPassword === "valid"}
+                isInvalid={validity.confirmPassword === "invalid"}
+                required
+              />
+              <Form.Control.Feedback type="invalid">
+                Las contraseñas no coinciden.
+              </Form.Control.Feedback>
+            </Form.Group>
+            <Form.Group as={Col} md="12" className="mb-3">
+              <Form.Check
+                required
+                id="terms"
+                label="Acepto los términos y condiciones"
+                feedback="Debe aceptar antes de enviar."
+                feedbackType="invalid"
+                checked={termsAgreed}
+                onChange={handleTermsChange}
+                isInvalid={submitted && !termsAgreed}
+              />
+            </Form.Group>
+            <div className="d-flex justify-content-between mt-4">
+              <Link to="/">
+                <Button variant="secondary" onClick={handleModalClose}>
+                  Volver
+                </Button>
+              </Link>
+              <Button variant="primary" type="submit">
+                Enviar
               </Button>
-            </Link>
-            <Button variant="primary" type="submit">
-              Enviar
-            </Button>
-          </div>
-        </Form>
-      </Card.Body>
-    </Card>
-  </div>
-      
+            </div>
+          </Form>
+        </Card.Body>
+      </Card>
+    </div>
   );
 }
 
 export default Register;
-
-{/* <Modal show={show} onHide={handleModalClose} >
-<Modal.Header closeButton>
-  <Modal.Title>Crear Usuario</Modal.Title>
-</Modal.Header>
-<Modal.Body className="d-flex flex-column">
-  {registrationSuccess && (
-    <Alert
-      variant="success"
-      onClose={() => setRegistrationSuccess(false)}
-      dismissible
-    >
-      ¡Registro exitoso! Su cuenta ha sido creada.
-    </Alert>
-  )}
-  <Form noValidate onSubmit={handleSubmit}>
-    <Form.Group as={Col} md="12" controlId="email">
-      <Form.Label>Ingresar Email:</Form.Label>
-      <Form.Control
-        type="email"
-        placeholder="Ejemplo: PizzeriaMammaMia!@hotmail.com"
-        value={formData.email}
-        onChange={handleChange}
-        isValid={validity.email === "valid"}
-        isInvalid={validity.email === "invalid"}
-        required
-      />
-      <Form.Control.Feedback type="invalid">
-        Ingrese un correo válido.
-      </Form.Control.Feedback>
-      <Form.Control.Feedback type="valid">
-        Correcto.
-      </Form.Control.Feedback>
-    </Form.Group>
-    <Form.Group as={Col} md="12" controlId="password">
-      <Form.Label>Ingresar Contraseña:</Form.Label>
-      <InputGroup hasValidation>
-        <Form.Control
-          type="password"
-          placeholder="Contraseña"
-          value={formData.password}
-          onChange={handleChange}
-          isValid={validity.password === "valid"}
-          isInvalid={validity.password === "invalid"}
-          required
-        />
-        <Form.Control.Feedback type="invalid">
-          La contraseña debe tener al menos 6 caracteres.
-        </Form.Control.Feedback>
-        <Form.Control.Feedback type="valid">
-          Clave Valida.
-        </Form.Control.Feedback>
-      </InputGroup>
-    </Form.Group>
-    <Form.Group as={Col} md="12" controlId="confirmPassword">
-      <Form.Label>Confirmar Contraseña:</Form.Label>
-      <Form.Control
-        type="password"
-        placeholder="Contraseña"
-        value={formData.confirmPassword}
-        onChange={handleChange}
-        isValid={validity.confirmPassword === "valid"}
-        isInvalid={validity.confirmPassword === "invalid"}
-        required
-      />
-      <Form.Control.Feedback type="invalid">
-        Las contraseñas no coinciden.
-      </Form.Control.Feedback>
-    </Form.Group>
-    <Form.Group as={Col} md="12" className="mb-3">
-      <Form.Check
-        required
-        id="terms"
-        label="Acepto los términos y condiciones"
-        feedback="Debe aceptar antes de enviar."
-        feedbackType="invalid"
-        checked={termsAgreed}
-        onChange={handleTermsChange}
-        isInvalid={submitted && !termsAgreed}
-      />
-    </Form.Group>
-    <Modal.Footer>
-      <Button variant="secondary" onClick={handleModalClose}>
-        Cerrar
-      </Button>
-      <Button variant="primary" type="submit">
-        Enviar
-      </Button>
-    </Modal.Footer>
-  </Form>
-</Modal.Body>
-</Modal> */}
