@@ -18,6 +18,7 @@ On March 23, we worked on consuming a pizza API, which is stored in a provided b
 
 On March 30th, we learned how to implement routing in React using React Router. We explored how to define routes, create navigation between pages, and handle dynamic parameters to improve the structure and functionality of our applications.
 
+<<<<<<< HEAD
 06 de abril, Se implementó el uso de Context en React para manejar el estado global de la aplicación. Esto permitió compartir datos entre múltiples componentes sin necesidad de prop drilling, facilitando la gestión de temas, autenticación y otros estados compartidos.
 
 April 6 Implemented the use of Context in React to manage the global state of the application. This allowed data to be shared across multiple components without the need for prop drilling, making it easier to handle themes, authentication, and other shared states.
@@ -45,3 +46,10 @@ The Navigate component from React Router was used to automatically redirect unau
 
 Routing structure reorganization:
 The routing system was reorganized to keep the code cleaner and more maintainable, clearly separating public routes from protected ones.
+=======
+
+06 de abril, Se implementó el uso de Context en React para manejar el estado global de la aplicación. Esto permitió compartir datos entre múltiples componentes sin necesidad de prop drilling, facilitando la gestión de temas, autenticación y otros estados compartidos.
+
+April 6
+Implemented the use of Context in React to manage the global state of the application. This allowed data to be shared across multiple components without the need for prop drilling, making it easier to handle themes, authentication, and other shared states.
+>>>>>>> 8359d688b529feb9279b7ed0296704857b1db874
