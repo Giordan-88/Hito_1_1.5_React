@@ -40,3 +40,9 @@ Use of Navigate:
 The Navigate component from React Router was used to automatically redirect unauthenticated users to the login page or another secure route, improving navigation flow.
 Routing structure reorganization:
 The routing system was reorganized to keep the code cleaner and more maintainable, clearly separating public routes from protected ones.
+
+Resumen 25 de abril:
+Se implementó JWT para manejar la autenticación del usuario de forma segura. El token se guarda en localStorage y se utiliza para identificar al usuario durante la sesión. Esto mejora la seguridad y mantiene al usuario autenticado incluso al recargar la página.
+
+April 25 Summary:
+JWT was implemented to securely manage user authentication. The token is stored in localStorage and used to identify the user during their session. This enhances security and keeps the user logged in even after refreshing the page.
