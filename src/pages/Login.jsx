@@ -7,27 +7,19 @@ import { Link } from "react-router-dom";
 import { useContext } from "react";
 import { UserContext } from "../context/UserContext";
 
-
 function Login({ show }) {
-  const { login } = useContext(UserContext);
+  const { loginUser } = useContext(UserContext);
   const emailRef = useRef(null);
   const passwordRef = useRef(null);
-  
 
   const [errorMessage, setErrorMessage] = useState(null);
-
   const [welcomeMessage, setWelcomeMessage] = useState("");
-
-  const validCredentials = {
-    email: "pizza@hotmail.com",
-    password: "pizza123",
-  };
 
   const isValidEmail = (email) => {
     return /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email);
   };
 
-  const handleSubmit = (event) => {
+  const handleSubmit = async (event) => {
     event.preventDefault();
     event.stopPropagation();
 
@@ -56,17 +48,12 @@ function Login({ show }) {
       return;
     }
 
-    if (
-      emailValue === validCredentials.email &&
-      passwordValue === validCredentials.password
-    ) {
-      login();
-      console.log("Login successful!");
-      setWelcomeMessage("Bienvenido a Pizzería Mamma Mia!");
-      setErrorMessage(null);
-      
+    const result = await loginUser(emailValue, passwordValue);
+
+    if (result.success) {
+      setWelcomeMessage(result.message);
     } else {
-      setErrorMessage("Correo o contraseña incorrectos. Inténtelo de nuevo.");
+      setErrorMessage(result.message);
     }
   };
 
@@ -112,7 +99,7 @@ function Login({ show }) {
                 required
               />
               <Form.Text className="text-muted">
-                Email de prueba: {validCredentials.email}
+                Email de prueba: test@test.com
               </Form.Text>
             </Form.Group>
 
@@ -126,7 +113,7 @@ function Login({ show }) {
                 required
               />
               <Form.Text className="text-muted">
-                Contraseña de prueba: {validCredentials.password}
+                Contraseña de prueba: 123123
               </Form.Text>
             </Form.Group>
 

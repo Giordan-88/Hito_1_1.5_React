@@ -3,11 +3,16 @@ import Col from "react-bootstrap/Col";
 import Form from "react-bootstrap/Form";
 import InputGroup from "react-bootstrap/InputGroup";
 import Alert from "react-bootstrap/Alert";
-import { useState } from "react";
 import Card from "react-bootstrap/Card";
+import { useState } from "react";
 import { Link } from "react-router-dom";
+import { useContext } from "react";
+import { UserContext } from "../context/UserContext";
 
 function Register({ show, handleClose }) {
+  const { registerUser } = useContext(UserContext);
+
+  // Estados
   const [formData, setFormData] = useState({
     email: "",
     password: "",
@@ -21,22 +26,17 @@ function Register({ show, handleClose }) {
   const [submitted, setSubmitted] = useState(false);
   const [termsAgreed, setTermsAgreed] = useState(false);
   const [registrationSuccess, setRegistrationSuccess] = useState(false);
+  const [errorMessage, setErrorMessage] = useState("");
 
-  const isValidEmail = (email) => {
-    return /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email);
-  };
+  // Validaciones
+  const isValidEmail = (email) => /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email);
+  const isValidPassword = (password) => password.length >= 6;
+  const isValidConfirmPassword = (password, confirmPassword) =>
+    password === confirmPassword && password !== "";
 
-  const isValidPassword = (password) => {
-    return password.length >= 6;
-  };
-
-  const isValidConfirmPassword = (password, confirmPassword) => {
-    return password === confirmPassword && password !== "";
-  };
-
+  // Manejo de cambios en los campos
   const handleChange = (event) => {
     const { id, value } = event.target;
-
     const newFormData = { ...formData, [id]: value };
     setFormData(newFormData);
 
@@ -45,6 +45,7 @@ function Register({ show, handleClose }) {
     }
   };
 
+  // Validación de campos individuales
   const validateField = (fieldId, data = formData, isSubmitting = false) => {
     let isValid = false;
 
@@ -52,7 +53,6 @@ function Register({ show, handleClose }) {
       isValid = isValidEmail(data.email);
     } else if (fieldId === "password") {
       isValid = isValidPassword(data.password);
-
       if (data.confirmPassword) {
         validateField("confirmPassword", data, isSubmitting);
       }
@@ -62,24 +62,24 @@ function Register({ show, handleClose }) {
 
     setValidity((prevValidity) => {
       const newValidity = { ...prevValidity };
-
       if (data[fieldId] || isSubmitting) {
         newValidity[fieldId] = isValid ? "valid" : "invalid";
       } else {
         newValidity[fieldId] = null;
       }
-
       return newValidity;
     });
 
     return isValid;
   };
 
+  // Manejo del checkbox de términos y condiciones
   const handleTermsChange = (event) => {
     setTermsAgreed(event.target.checked);
   };
 
-  const handleSubmit = (event) => {
+  // Envío del formulario
+  const handleSubmit = async (event) => {
     event.preventDefault();
     event.stopPropagation();
 
@@ -94,28 +94,21 @@ function Register({ show, handleClose }) {
     setSubmitted(true);
 
     if (emailValid && passwordValid && confirmPasswordValid && termsAgreed) {
-      console.log("El registro se realizo exitosamente.!", formData);
+      const result = await registerUser(formData);
 
-      setRegistrationSuccess(true);
-
-      setTimeout(() => {
-        setFormData({
-          email: "",
-          password: "",
-          confirmPassword: "",
-        });
-        setValidity({
-          email: null,
-          password: null,
-          confirmPassword: null,
-        });
-        setSubmitted(false);
-        setTermsAgreed(false);
-      }, 1500);
+      if (result.success) {
+        setRegistrationSuccess(true);
+        setTimeout(() => {
+          resetForm();
+        }, 1500);
+      } else {
+        setErrorMessage(result.message);
+      }
     }
   };
 
-  const handleModalClose = () => {
+  // Reiniciar formulario
+  const resetForm = () => {
     setFormData({
       email: "",
       password: "",
@@ -129,6 +122,11 @@ function Register({ show, handleClose }) {
     setSubmitted(false);
     setTermsAgreed(false);
     setRegistrationSuccess(false);
+  };
+
+  // Cerrar modal
+  const handleModalClose = () => {
+    resetForm();
     handleClose();
   };
 
@@ -149,6 +147,15 @@ function Register({ show, handleClose }) {
               dismissible
             >
               ¡Registro exitoso! Su cuenta ha sido creada.
+            </Alert>
+          )}
+          {errorMessage && (
+            <Alert
+              variant="danger"
+              onClose={() => setErrorMessage("")}
+              dismissible
+            >
+              {errorMessage}
             </Alert>
           )}
           <Form noValidate onSubmit={handleSubmit}>

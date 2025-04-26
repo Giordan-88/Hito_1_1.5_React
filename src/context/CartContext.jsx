@@ -69,6 +69,35 @@ export function CartProvider({ children }) {
     });
   };
 
+  const handleDelete = () => {
+    setCart({});
+    localStorage.setItem("cart", JSON.stringify({}));
+  };
+
+  const processPayment = async (cart, token) => {
+    try {
+      const response = await fetch("http://localhost:5000/api/checkouts", {
+        method: "POST",
+        headers: {
+          Authorization: `Bearer ${token}`,
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({ cart }),
+      });
+
+      const data = await response.json();
+
+      if (data.error) {
+        return { success: false, message: "❌ Error al procesar el pago. Por favor, inténtelo de nuevo." };
+      }
+
+      handleDelete(); // Vaciar el carrito después del pago exitoso
+      return { success: true, message: "✅ Pago procesado con éxito. ¡Gracias por su compra!" };
+    } catch (error) {
+      console.error("Error al procesar el pago:", error);
+      return { success: false, message: "❌ Error al procesar el pago. Por favor, inténtelo de nuevo." };
+    }
+  };
   return (
     <CartContext.Provider
       value={{
@@ -80,6 +109,8 @@ export function CartProvider({ children }) {
         handleAddToCart,
         totalItems,
         capitalize,
+        handleDelete,
+        processPayment,
       }}
     >
       {children}
